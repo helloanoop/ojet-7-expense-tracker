@@ -1,16 +1,20 @@
-define(['models/expense'], function(Expense){
-  var ex = new Expense({
-    id: '6313a073d5018e96'
-  });
+define(['models/expense', 'knockout', 'ojs/ojinputtext',
+  'ojs/ojformlayout', 'ojs/ojlabel',
+  'ojs/ojbutton'], function(Expense, ko){
+  
+  function ViewModel() {
+    var self = this;
 
-  ex
-    .fetch()
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(err) {
-      console.log(err);
-    })
+    this.form = {
+      description: ko.observable()
+    };
+    this.onCreate = function() {
+      var ex = new Expense();
 
-  return {};
+      ex.set('description', self.form.description());
+      ex.save();
+    };
+  }
+
+  return ViewModel;
 });

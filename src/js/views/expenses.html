@@ -1,1 +1,18 @@
-Expenses
+<h2>Expenses</h2>
+<div class="oj-flex">
+  <div class="oj-flex-item oj-sm-3">
+    <div class="oj-panel">
+      <h5>Create Expense</h5>
+      <oj-form-layout>
+        <oj-label>Description</oj-label>
+        <oj-input-text value="{{form.description}}"></oj-input-text>
+         <oj-button on-oj-action='[[onCreate]]'>Create</oj-button>
+      </oj-form-layout>
+    </div>
+  </div>
+  <div class="oj-flex-item oj-sm-9">
+    <div class="oj-panel">
+      List Expense
+    </div>
+  </div>
+</div>
