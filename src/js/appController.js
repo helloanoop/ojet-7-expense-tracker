@@ -1,0 +1,55 @@
+/**
+ * @license
+ * Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ * The Universal Permissive License (UPL), Version 1.0
+ */
+/*
+ * Your application specific code will go here
+ */
+define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout', 'ojs/ojknockout',
+  'ojs/ojcore', 'ojs/ojtoolbar', 'ojs/ojbutton', 'ojs/ojrouter',
+  'ojs/ojmodule', 'text'],
+  function(ResponsiveUtils, ResponsiveKnockoutUtils, ko) {
+     function ControllerViewModel() {
+       var self = this;
+
+      // Media queries for repsonsive layouts
+      var smQuery = ResponsiveUtils.getFrameworkQuery(ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
+      self.smScreen = ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+
+      // Header
+      // Application Name used in Branding Area
+      self.appName = ko.observable("Expense tracker");
+      // User Info used in Global Navigation area
+      self.userLogin = ko.observable("john.hancock@oracle.com");
+
+      // Router
+      oj.Router.defaults['urlAdapter'] = new oj.Router.urlPathAdapter();
+
+      self.router = oj.Router.rootInstance;
+      self.router.configure({
+        'pref':  { label: 'Expenses',   value: 'expenses',
+                   isDefault: true },
+        'chap1': { label: 'Categories', value: 'categories' },
+        'chap2': { label: 'Reports', value: 'reports' }
+      });
+      self.router.stateId('pref');
+
+      // Footer
+      function footerLink(name, id, linkTarget) {
+        this.name = name;
+        this.linkId = id;
+        this.linkTarget = linkTarget;
+      }
+      self.footerLinks = ko.observableArray([
+        new footerLink('About Oracle', 'aboutOracle', 'http://www.oracle.com/us/corporate/index.html#menu-about'),
+        new footerLink('Contact Us', 'contactUs', 'http://www.oracle.com/us/corporate/contact/index.html'),
+        new footerLink('Legal Notices', 'legalNotices', 'http://www.oracle.com/us/legal/index.html'),
+        new footerLink('Terms Of Use', 'termsOfUse', 'http://www.oracle.com/us/legal/terms/index.html'),
+        new footerLink('Your Privacy Rights', 'yourPrivacyRights', 'http://www.oracle.com/us/legal/privacy/index.html')
+      ]);
+     }
+
+     return new ControllerViewModel();
+  }
+);
