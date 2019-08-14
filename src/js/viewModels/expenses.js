@@ -1,10 +1,4 @@
-define(['ojs/ojmodel'], function(){
-  console.log(oj.Model);
-
-  var Expense = oj.Model.extend({
-    urlRoot: 'http://localhost:5000/api/expense',
-  });
-
+define(['models/expense'], function(Expense){
   var ex = new Expense({
     id: '6313a073d5018e96'
   });
