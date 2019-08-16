@@ -2,23 +2,29 @@
 <div class="oj-flex">
   <div class="oj-flex-item oj-sm-3">
     <div class="oj-panel">
-      <h5>Create Expense</h5>
+      <h3>Create Expense</h3>
       <oj-form-layout>
         <oj-label>Description</oj-label>
         <oj-input-text value="{{form.description}}"></oj-input-text>
+
+        <oj-label>Amount</oj-label>
+        <oj-input-number value="{{form.amount}}"></oj-input-number>
          <oj-button on-oj-action='[[onCreate]]'>Create</oj-button>
       </oj-form-layout>
     </div>
   </div>
   <div class="oj-flex-item oj-sm-9">
     <div class="oj-panel">
-      Expense List <br>
+      <h3>Expense List</h3>
 
       <oj-table
-        data='[[dataprovider]]'
+        data='[[pagingDataProvider]]'
         columns='[[columnOptions]]'
         style='width: 100%; height: 200px;'>
       </oj-table>
+
+      <oj-paging-control data='[[pagingDataProvider]]' page-size='5' class="ex-expense-list-pager">
+      </oj-paging-control>
     </div>
   </div>
 </div>
