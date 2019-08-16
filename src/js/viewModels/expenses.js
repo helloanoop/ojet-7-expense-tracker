@@ -30,7 +30,7 @@ define(['models/expense', 'models/expenses', 'knockout', 'ojs/ojinputtext',
       amount: ko.observable()
     };
 
-    this.onCreate = function() {
+    this.createExpense = function() {
       var ex = new Expense();
 
       ex.set('description', self.form.description());
