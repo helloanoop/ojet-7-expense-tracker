@@ -1,0 +1,20 @@
+<!--
+  Copyright (c) 2015, 2019, Oracle and/or its affiliates.
+  The Universal Permissive License (UPL), Version 1.0
+-->
+<table>
+  <div class="slot-area-top">
+    <oj-bind-slot name="top"/>
+  </div>
+  <thead>
+    <th style="text-align: left;">Name</th>
+  </thead>
+  <tbody data-bind="foreach: $props.categories">
+    <tr>
+      <td data-bind="text:$data"></td>
+    </tr>
+  </tbody>
+  <div class="slot-area-bottom">
+    <oj-bind-slot name="bottom"/>
+  </div>
+</table>

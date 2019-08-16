@@ -1,0 +1,9 @@
+category-table:not(.oj-complete){
+  visibility: hidden;
+}
+
+category-table{
+	min-height: 50px;
+	width: 50px;
+    backgorund-color: lightgrey;
+}

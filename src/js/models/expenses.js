@@ -1,5 +1,10 @@
-define(['./expense', 'ojs/ojmodel'], function(Expense){
-  var Expenses = oj.Collection.extend({
+define(['./expense', 'helpers/user', './base-collection', 'ojs/ojmodel',
+'ojs/ojcore'], function(Expense, UserHelper, BaseCollection){
+  window.anoop = BaseCollection;
+  var Expenses = BaseCollection.extend({
+    initialize: function(params) {
+      BaseCollection.prototype.initialize.call(this, params);
+    },
     url: 'http://localhost:5000/api/expense',
     model: Expense,
     customURL: function(operation, collection, options) {
@@ -8,22 +13,6 @@ define(['./expense', 'ojs/ojmodel'], function(Expense){
       }
 
       return 'http://localhost:5000/api/expense';
-    },
-    paginatedRequestUrl: function(options) {
-      return `${this.url}?$limit=${options.fetchSize}&$skip=${options.startIndex}`;
-    },
-    customPagingOptions: function(response) {
-      if(!response || !response.data) {
-        return response;
-      }
-
-      return {
-        totalResults: response.total,
-        limit: response.limit,
-        count: response.data.length,
-        offset: response.skip,
-        hasMore: (response.skip + response.data.length) < response.total
-      };
     }
   });
 

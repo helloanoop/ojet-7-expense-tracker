@@ -1,0 +1,22 @@
+<div class="page expense-login">
+    <div class="text-center font-30">Welcome to Jerrys Expense App</div>
+    <div class="oj-form margin-top-30">
+        <div class="oj-flex display-flex justify-content-center">  
+          <div class="oj-flex-item text-center">
+            <oj-label for="input">Username</oj-label>
+            <oj-input-text id="username" class="input-field" required value={{username}}></oj-input-text>
+          </div>
+        </div>
+        <div class="oj-flex display-flex justify-content-center margin-top-10">  
+          <div class="oj-flex-item text-center">
+            <oj-label for="input">Password</oj-label>
+            <oj-input-password id="password" class="input-field" required value={{password}}></oj-input-password>
+          </div>
+        </div>
+        <div class="text-center font-12" data-bind="visible:error">Invalid credentials</div>
+
+        <div class="oj-flex display-flex justify-content-center margin-top-10">  
+            <oj-button data-bind="click:login">Login</oj-button>
+        </div>
+    </div>
+</div>

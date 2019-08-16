@@ -57,7 +57,7 @@
             <h1 class="oj-sm-only-hide oj-web-applayout-header-title" title="Application Name"><oj-bind-text value="[[appName]]"></oj-bind-text></h1>
 
             <!-- Menu -->
-            <oj-toolbar id='buttons-container' class="ex-menubar">
+            <oj-toolbar id='buttons-container' class="ex-menubar" data-bind="visible:userLoggedIn">
               <oj-buttonset-one class="oj-buttonset-width-auto" value="{{router.stateId}}" focus-management="none">
                 <!-- ko foreach: router.states -->
                 <oj-option value="[[id]]">
@@ -69,7 +69,15 @@
           </div>
           <div class="oj-flex-bar-end">
             <!-- Responsive Toolbar -->
-            <oj-toolbar>
+
+            <!-- Locale Selector -->
+            <!-- ko foreach: toolbarButtons -->
+            <oj-button data-bind="attr:{'label':label}" >
+              <span data-bind="text: label" on-click="[[$parent.setLang]]"></span>
+            </oj-button>
+            <!-- /ko -->
+
+            <oj-toolbar data-bind="visible:userLoggedIn">
               <oj-menu-button id="userMenu" display="[[smScreen() ? 'icons' : 'all']]" chroming="half">
                 <span><oj-bind-text value="[[userLogin]]"></oj-bind-text></span>
                 <span slot="endIcon" :class="[[{'oj-icon demo-appheader-avatar': smScreen(), 'oj-component-icon oj-button-menu-dropdown-icon': !smScreen()}]]"></span>

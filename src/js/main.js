@@ -33,6 +33,13 @@ requirejs.config(
     'proj4': 'libs/proj4js/dist/proj4-src',
     'css': 'libs/require-css/css',
     'touchr': 'libs/touchr/touchr'
+  },
+  config: {
+    ojL10n: {
+      merge: {
+        'ojtranslations/nls/ojtranslations': 'resources/nls/expense'
+      }
+    }
   }
   //endinjector
 }

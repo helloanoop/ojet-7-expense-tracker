@@ -1,0 +1,34 @@
+{
+  "name": "category-table",
+  "version": "1.0.0",
+  "jetVersion": "^7.1.0",
+  "displayName": "A user friendly, translatable name of the component.",
+  "description": "A translatable high-level description for the component.",
+  "properties": {
+    "categories" : {
+      "type" : "object"
+    }
+  },
+  "methods": {
+    "changeBackground" : {
+      "internalName" : "_setBackgroundColor",
+      "params" : [{
+        "description":"Color name or hex color code",
+        "name" : "colorToSet",
+        "type": "string"
+      }],
+      "return" : "boolean"
+    }
+  }, 
+  "events": {
+
+  }, 
+  "slots": {
+    "top":{
+      "description" : "Top"
+    },
+    "bottom":{
+      "description" : "Bottom"
+    }
+  }
+}

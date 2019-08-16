@@ -6,12 +6,40 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout', 'ojs/ojknockout',
+define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
+  'helpers/signals', 'helpers/user', 'ojs/ojknockout',
   'ojs/ojcore', 'ojs/ojtoolbar', 'ojs/ojbutton', 'ojs/ojrouter',
   'ojs/ojmodule', 'text'],
-  function(ResponsiveUtils, ResponsiveKnockoutUtils, ko) {
-     function ControllerViewModel() {
-       var self = this;
+  function(ResponsiveUtils, ResponsiveKnockoutUtils, ko, Signals, UserHelper) {
+    function ControllerViewModel() {
+      var self = this;
+
+      self.userLoggedIn = ko.observable(false);
+
+      self.toolbarButtons = [
+        {"label": "english"},
+        {"label": "français"},
+      ];
+
+      this.setLang = function (evt) {
+        var newLang = '';
+        var lang = evt.currentTarget.innerHTML;
+        switch (lang) {
+          case 'français':
+            newLang = 'fr-FR';
+            break;
+          default:
+            newLang = 'en-US';
+        }
+        console.log(newLang);
+        oj.Config.setLocale(newLang, function () {
+          self.appName(oj.Translations.getTranslatedString('app_name'));
+          $('html').attr('lang', newLang);
+          // in this callback function we can update whatever is needed with the new locale. 
+          // In this example, we reload the menu items
+          // self.helloworld(oj.Translations.getTranslatedString('helloworld'));
+        });
+      };
 
       // Media queries for repsonsive layouts
       var smQuery = ResponsiveUtils.getFrameworkQuery(ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
@@ -28,12 +56,19 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout', 'o
 
       self.router = oj.Router.rootInstance;
       self.router.configure({
-        'pref':  { label: 'Expenses',   value: 'expenses',
-                   isDefault: true },
-        'chap1': { label: 'Categories', value: 'categories' },
-        'chap2': { label: 'Reports', value: 'reports' }
+        'expense':  { label: 'Expenses',   value: 'expenses', isDefault: true},
+        'categories': { label: 'Categories', value: 'categories'},
+        'reports': { label: 'Reports', value: 'reports' },
+        'login': { label: 'Login', value: 'login' }
       });
-      self.router.stateId('pref');
+
+      let token = UserHelper.getAccessToken();
+      if(token) {
+        self.userLoggedIn(true);
+        oj.Router.rootInstance.go('expense');
+      } else {
+        self.router.stateId('login');
+      }
 
       // Footer
       function footerLink(name, id, linkTarget) {
@@ -48,6 +83,11 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout', 'o
         new footerLink('Terms Of Use', 'termsOfUse', 'http://www.oracle.com/us/legal/terms/index.html'),
         new footerLink('Your Privacy Rights', 'yourPrivacyRights', 'http://www.oracle.com/us/legal/privacy/index.html')
       ]);
+
+      Signals.user.loggedIn.add(function() {
+        self.userLoggedIn(true);
+        oj.Router.rootInstance.go('expense');
+      });
      }
 
      return new ControllerViewModel();
