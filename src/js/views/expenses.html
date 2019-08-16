@@ -1,4 +1,5 @@
 <h2>Expenses</h2>
+
 <div class="oj-flex">
   <div class="oj-flex-item oj-sm-3">
     <div class="oj-panel">
@@ -9,11 +10,12 @@
 
         <oj-label>Amount</oj-label>
         <oj-input-number value="{{form.amount}}"></oj-input-number>
-         <oj-button on-oj-action='[[onCreate]]'>Create</oj-button>
+        <oj-button on-oj-action='[[onCreate]]'>Create</oj-button>
       </oj-form-layout>
     </div>
   </div>
-  <div class="oj-flex-item oj-sm-9">
+
+  <div class="oj-flex-item oj-sm-9" style="padding-left: 10px;">
     <div class="oj-panel">
       <h3>Expense List</h3>
 
@@ -21,10 +23,25 @@
         data='[[pagingDataProvider]]'
         columns='[[columnOptions]]'
         style='width: 100%; height: 200px;'>
+
+        <template slot="actionTemplate" data-oj-as="cell">
+          <oj-button on-oj-action="[[openEditModal]]">Edit</oj-button>
+        </template>
       </oj-table>
 
       <oj-paging-control data='[[pagingDataProvider]]' page-size='5' class="ex-expense-list-pager">
       </oj-paging-control>
     </div>
   </div>
+
+  <oj-dialog id="editExpenseDialog" style="display:none" title="Edit Expense">
+    <div slot="body">
+      <oj-label>Description</oj-label>
+      <oj-input-text value="{{editForm.description}}"></oj-input-text>
+
+      <oj-label>Amount</oj-label>
+      <oj-input-number value="{{editForm.amount}}"></oj-input-number>
+      <oj-button on-oj-action='[[onCreate]]'>Edit</oj-button>
+    </div>
+  </oj-dialog>
 </div>
