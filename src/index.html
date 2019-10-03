@@ -59,7 +59,7 @@
             <!-- Menu -->
             <oj-toolbar id='buttons-container' class="ex-menubar" data-bind="visible:userLoggedIn">
               <oj-buttonset-one class="oj-buttonset-width-auto" value="{{router.stateId}}" focus-management="none">
-                <!-- ko foreach: router.states -->
+                <!-- ko foreach: navStates -->
                 <oj-option value="[[id]]">
                   <span data-bind="text: label"></span>
                 </oj-option>

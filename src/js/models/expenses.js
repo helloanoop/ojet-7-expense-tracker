@@ -1,6 +1,5 @@
 define(['./expense', 'helpers/user', './base-collection', 'ojs/ojmodel',
 'ojs/ojcore'], function(Expense, UserHelper, BaseCollection){
-  window.anoop = BaseCollection;
   var Expenses = BaseCollection.extend({
     initialize: function(params) {
       BaseCollection.prototype.initialize.call(this, params);

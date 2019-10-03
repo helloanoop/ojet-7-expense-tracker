@@ -52,7 +52,7 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
       self.userLogin = ko.observable("john.hancock@oracle.com");
 
       // Router
-      oj.Router.defaults['urlAdapter'] = new oj.Router.urlPathAdapter();
+      oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
       self.router = oj.Router.rootInstance;
       self.router.configure({
@@ -69,6 +69,13 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
       } else {
         self.router.stateId('login');
       }
+
+      this.navStates = ko.observableArray([]);
+      this.router.states.forEach(function(state) {
+        if(state.value !== 'login') {
+          self.navStates.push(state);
+        }
+      });
 
       // Footer
       function footerLink(name, id, linkTarget) {

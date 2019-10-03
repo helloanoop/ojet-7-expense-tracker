@@ -1,0 +1,37 @@
+
+// Note that the order in the aggregating file is important
+//
+// 1. custom variables file: Due to the way sass default works, 
+//    the custom variable file must be imported before the platform theme 
+//    aggregating file (where the platform variable file will be imported).
+// 2. platform theme aggregating file
+
+//import custom variable overrides
+
+$appLayoutWebHeaderBgColor: #283655;
+$appLayoutWebHeaderTextColor: white;
+
+@import "blueberry.web.settings";
+
+@import 'helpers/flex';
+@import 'helpers/fonts';
+@import 'helpers/common';
+
+.oj-web-applayout-header{
+  .demo-oracle-icon{
+    background: white;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }  
+}
+.oj-web-applayout-footer-item{
+  color: white !important;
+
+  a{
+    color: white !important;
+  }
+}
+
+// import alta aggregating file
+@import "../../../../node_modules/@oracle/oraclejet/dist/scss/alta/oj-alta";
