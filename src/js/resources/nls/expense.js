@@ -1,6 +1,8 @@
 define({
     "root": {
-        "app_name": "Expense Tracker"
+      "app": {
+        name: "Expense Tracker"
+      }
     },
     "fr": true
 });

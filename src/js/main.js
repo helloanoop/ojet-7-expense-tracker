@@ -34,6 +34,7 @@ requirejs.config(
     'css': 'libs/require-css/css',
     'touchr': 'libs/touchr/touchr'
   },
+  //endinjector
   config: {
     ojL10n: {
       merge: {
@@ -41,7 +42,6 @@ requirejs.config(
       }
     }
   }
-  //endinjector
 }
 );
 

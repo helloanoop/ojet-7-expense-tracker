@@ -40,7 +40,9 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
         }
         console.log(newLang);
         oj.Config.setLocale(newLang, function () {
-          self.appName(oj.Translations.getTranslatedString('app_name'));
+          console.log(oj.Translations.getTranslatedString('oj-message.fatal'));
+          console.log(oj.Translations.getTranslatedString('app.name'));
+          self.appName(oj.Translations.getTranslatedString('app.name'));
           $('html').attr('lang', newLang);
           // in this callback function we can update whatever is needed with the new locale. 
           // In this example, we reload the menu items

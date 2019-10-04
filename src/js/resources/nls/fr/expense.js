@@ -1,3 +1,5 @@
 define({
-  "app_name": "Ressources humaines"
+  "app": {
+    name: "Suivi des dépenses"
+  }
 });
