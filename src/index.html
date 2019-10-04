@@ -44,6 +44,10 @@
   </head>
   <body class="oj-web-applayout-body">
     <div id="globalBody" class="oj-web-applayout-page">
+
+      <!-- Messages -->
+      <oj-messages messages="[[messagesDataprovider]]" position="{}" display="notification">
+      </oj-messages>
       <!--
          ** Oracle JET V7.1.0 web application header pattern.
          ** Please see the demos under Cookbook/Patterns/App Shell: Web
@@ -85,7 +89,7 @@
                   <oj-option id="pref" value="pref">Preferences</oj-option>
                   <oj-option id="help" value="help">Help</oj-option>
                   <oj-option id="about" value="about">About</oj-option>
-                  <oj-option id="out" value="out">Sign Out</oj-option>
+                  <oj-option data-bind="click:logOut" id="out" value="out">Sign Out</oj-option>
                 </oj-menu>
               </oj-menu-button>
             </oj-toolbar>

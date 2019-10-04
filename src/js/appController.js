@@ -9,14 +9,21 @@
 define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
   'helpers/signals', 'helpers/user', 'ojs/ojknockout',
   'ojs/ojcore', 'ojs/ojtoolbar', 'ojs/ojbutton', 'ojs/ojrouter',
-  'ojs/ojmodule', 'text'],
+  'ojs/ojmodule', 'text', 'ojs/ojmessages',
+  'ojs/ojarraydataprovider', ],
   function(ResponsiveUtils, ResponsiveKnockoutUtils, ko, Signals, UserHelper) {
     function ControllerViewModel() {
       var self = this;
 
-      self.userLoggedIn = ko.observable(false);
+      this.messages = ko.observableArray([]);
+      this.messagesDataprovider = new oj.ArrayDataProvider(this.messages);
+      Signals.messages.add(function(message) {
+        self.messages.push(message);
+      });
 
-      self.toolbarButtons = [
+      this.userLoggedIn = ko.observable(false);
+
+      this.toolbarButtons = [
         {"label": "english"},
         {"label": "français"},
       ];
@@ -59,7 +66,8 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
         'expense':  { label: 'Expenses',   value: 'expenses', isDefault: true},
         'categories': { label: 'Categories', value: 'categories'},
         'reports': { label: 'Reports', value: 'reports' },
-        'login': { label: 'Login', value: 'login' }
+        'login': { label: 'Login', value: 'login' },
+        'register': { label: 'Register', value: 'register' }
       });
 
       let token = UserHelper.getAccessToken();
@@ -95,6 +103,12 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
         self.userLoggedIn(true);
         oj.Router.rootInstance.go('expense');
       });
+
+      this.logOut = function() {
+        self.userLoggedIn(false);
+        UserHelper.setAccessToken(null);
+        oj.Router.rootInstance.go('login');
+      };
      }
 
      return new ControllerViewModel();

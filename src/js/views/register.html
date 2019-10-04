@@ -1,5 +1,5 @@
-<div class="page expense-login">
-    <div class="font-30">Login</div>
+<div class="page expense-register">
+    <div class="font-30">Register</div>
     <div class="oj-form margin-top-30">
         <div class="oj-flex display-flex justify-content-center">  
           <div class="oj-flex-item">
@@ -13,12 +13,10 @@
             <oj-input-password id="password" class="input-field" required value={{password}}></oj-input-password>
           </div>
         </div>
-        <div class="font-12" data-bind="visible:error">Invalid credentials</div>
+        <div class="font-12" data-bind="visible:error">Registration failed</div>
 
         <div class="oj-flex display-flex margin-top-10">  
-            <oj-button id="login-button" on-oj-action="[[login]]">Login</oj-button>
-        </div> <br>
-
-        Not a user ? <a data-bind="click:goToRegisterPage">Register Now</a>
+            <oj-button id="register-button" on-oj-action="[[register]]">Register</oj-button>
+        </div>
     </div>
 </div>

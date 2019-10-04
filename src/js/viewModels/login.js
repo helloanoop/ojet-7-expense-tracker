@@ -6,11 +6,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'models/authentication',
   function ViewModel() {
     var self = this;
 
-    self.error = ko.observable(false);
-    self.username = ko.observable('');
-    self.password = ko.observable('');
+    this.router = oj.Router.rootInstance;
+    this.error = ko.observable(false);
+    this.username = ko.observable('');
+    this.password = ko.observable('');
 
-    self.login = function() {
+    this.login = function() {
       Authentication
           .login(self.username(), self.password())
           .then(function(token) {
@@ -21,6 +22,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'models/authentication',
             self.error(true);
           });
     };
+
+    this.goToRegisterPage = function() {
+      self.router.stateId('register');
+    }
   }
 
   return ViewModel;

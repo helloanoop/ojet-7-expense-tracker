@@ -7,7 +7,7 @@ define([], function(oj){
       let val = window.localStorage.getItem(key);
 
       if(!val || val === "undefined" || val === "null")
-        return undefined;
+        return null;
       else
         return JSON.parse(val);
     }
