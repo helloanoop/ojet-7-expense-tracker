@@ -1,11 +1,18 @@
-define(['models/expense', 'models/expenses', 'knockout', 'ojs/ojinputtext',
+define(['models/expense', 'models/expenses', 'knockout',
+  'helpers/l10n', 'ojs/ojvalidation-base', 'ojs/ojinputtext',
   'ojs/ojformlayout', 'ojs/ojlabel',
   'ojs/ojbutton', 'ojs/ojcollectiondataprovider',
   'ojs/ojpagingdataproviderview', 'ojs/ojpagingcontrol',
-  'ojs/ojtable', 'ojs/ojinputnumber'], function(Expense, Expenses, ko){
+  'ojs/ojtable', 'ojs/ojinputnumber',
+  'ojs/ojdatetimepicker',
+  'ojs/ojtimezonedata'], function(Expense, Expenses, ko, LocalizationHelper, ValidationBase){
   
   function ViewModel() {
     var self = this;
+
+    this.label = {
+      createExpense: LocalizationHelper.getLabel("app.pages.expense.createExpense")
+    };
 
     this.columnOptions = [
       {"headerText": "Description", "field": "description"},
@@ -27,7 +34,8 @@ define(['models/expense', 'models/expenses', 'knockout', 'ojs/ojinputtext',
 
     this.form = {
       description: ko.observable(),
-      amount: ko.observable()
+      amount: ko.observable(),
+      date: ko.observable(ValidationBase.IntlConverterUtils.dateToLocalIso(new Date(2013, 0, 1)))
     };
 
     this.createExpense = function() {

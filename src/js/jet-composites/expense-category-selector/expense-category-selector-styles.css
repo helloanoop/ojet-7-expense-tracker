@@ -1,0 +1,8 @@
+expense-category-selector:not(.oj-complete){
+  visibility: hidden;
+}
+
+expense-category-selector{
+	min-height: 50px;
+	width: 50px;
+}

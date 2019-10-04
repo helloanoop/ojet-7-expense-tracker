@@ -7,11 +7,11 @@
  * Your application specific code will go here
  */
 define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
-  'helpers/signals', 'helpers/user', 'ojs/ojknockout',
+  'helpers/l10n', 'helpers/signals', 'helpers/user', 'ojs/ojknockout',
   'ojs/ojcore', 'ojs/ojtoolbar', 'ojs/ojbutton', 'ojs/ojrouter',
   'ojs/ojmodule', 'text', 'ojs/ojmessages',
   'ojs/ojarraydataprovider', ],
-  function(ResponsiveUtils, ResponsiveKnockoutUtils, ko, Signals, UserHelper) {
+  function(ResponsiveUtils, ResponsiveKnockoutUtils, ko, LocalizationHelper, Signals, UserHelper) {
     function ControllerViewModel() {
       var self = this;
 
@@ -23,7 +23,7 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
 
       this.userLoggedIn = ko.observable(false);
 
-      this.toolbarButtons = [
+      this.locales = [
         {"label": "english"},
         {"label": "français"},
       ];
@@ -31,23 +31,8 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
       this.setLang = function (evt) {
         var newLang = '';
         var lang = evt.currentTarget.innerHTML;
-        switch (lang) {
-          case 'français':
-            newLang = 'fr-FR';
-            break;
-          default:
-            newLang = 'en-US';
-        }
-        console.log(newLang);
-        oj.Config.setLocale(newLang, function () {
-          console.log(oj.Translations.getTranslatedString('oj-message.fatal'));
-          console.log(oj.Translations.getTranslatedString('app.name'));
-          self.appName(oj.Translations.getTranslatedString('app.name'));
-          $('html').attr('lang', newLang);
-          // in this callback function we can update whatever is needed with the new locale. 
-          // In this example, we reload the menu items
-          // self.helloworld(oj.Translations.getTranslatedString('helloworld'));
-        });
+
+        Signals.localeChange.dispatch(lang);
       };
 
       // Media queries for repsonsive layouts
@@ -56,7 +41,8 @@ define(['ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'knockout',
 
       // Header
       // Application Name used in Branding Area
-      self.appName = ko.observable("Expense tracker");
+      // self.appName = ko.observable("Expense tracker");
+      self.appName = LocalizationHelper.getLabel('app.name');
       // User Info used in Global Navigation area
       self.userLogin = ko.observable("john.hancock@oracle.com");
 

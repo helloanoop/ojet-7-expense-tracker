@@ -32,10 +32,11 @@ requirejs.config(
     'customElements': 'libs/webcomponents/custom-elements.min',
     'proj4': 'libs/proj4js/dist/proj4-src',
     'css': 'libs/require-css/css',
-    'touchr': 'libs/touchr/touchr'
-  },
+    'touchr': 'libs/touchr/touchr',
+    "mockjax": "libs/jquery-mockjax/dist/jquery.mockjax"
+  }
   //endinjector
-  config: {
+  ,config: {
     ojL10n: {
       merge: {
         'ojtranslations/nls/ojtranslations': 'resources/nls/expense'

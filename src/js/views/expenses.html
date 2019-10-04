@@ -2,13 +2,17 @@
 <div class="oj-flex">
   <div class="oj-flex-item oj-sm-3">
     <div class="oj-panel">
-      <h3>Create Expense</h3>
+      <h3 data-bind="text:label.createExpense"></h3>
       <oj-form-layout>
         <oj-label>Description</oj-label>
         <oj-input-text value="{{form.description}}"></oj-input-text>
 
         <oj-label>Amount</oj-label>
         <oj-input-number value="{{form.amount}}"></oj-input-number>
+
+        <oj-label for="datepicker">Date Picker</oj-label>
+        <oj-date-picker id="datepicker" value={{form.date}}>
+        </oj-date-picker>
         <oj-button on-oj-action='[[createExpense]]'>Create</oj-button>
       </oj-form-layout>
     </div>

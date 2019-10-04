@@ -11,11 +11,17 @@
 $appLayoutWebHeaderBgColor: #283655;
 $appLayoutWebHeaderTextColor: white;
 
+$buttonBorderRadius: 20px;
+$buttonBgColor: #283655;
+$buttonTextColor: white;
+
 @import "blueberry.web.settings";
 
 @import 'helpers/flex';
 @import 'helpers/fonts';
 @import 'helpers/common';
+
+@import 'pages/login';
 
 .oj-web-applayout-header{
   .demo-oracle-icon{
